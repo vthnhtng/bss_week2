@@ -1,0 +1,436 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    font-size: small;
+}
+
+
+i {
+    padding-right: 10px;
+    color: black;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f0f2f5;
+    color: white;
+    padding: 20px 0;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.sidebar .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+
+.sidebar .title span {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: black;
+}
+
+.sidebar .itemContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.sidebar .sidebarItem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.sidebar .sidebarItem:hover {
+    background-color: #dae2eb;
+}
+
+.sidebar .sidebarItem span {
+    color: #34495e;
+}
+
+.sidebar .sidebarItem span.highlight {
+    color: #4d37ca;
+    font-weight: bold;
+}
+
+
+/* Main container styles */
+.main {
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #ecf0f1;
+    padding: 25px 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+.header .account {
+    display: flex;
+    align-items: center;
+}
+
+.header .account img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.header .account span {
+    font-size: 1em;
+    color: #2c3e50;
+}
+
+.hamberger {
+    display: none;
+}
+
+/* Container styles */
+.container {
+    padding: 50px;
+    padding-top: 80px;
+    background-color: rgb(226, 226, 226);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dataTable {
+    width: 80%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+    font-size: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+
+}
+
+.dataTable th {
+    background-color: #f2f2f2;
+    border: 1px solid #e0e0e0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 0px;
+    padding-left: 15px;
+    text-align: left;
+    font-weight: bold;
+    color: #212121;
+    background-color: rgb(246, 245, 245);
+
+    border: none;
+}
+.dataTable td {
+    border: 1px solid #e0e0e0;
+    border-left: none;
+    border-right: none;
+    padding: 12px 15px;
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #333;
+}
+
+
+.dataTable td:nth-child(5) {
+    text-align: center;
+}
+
+.dataTable td[colspan="6"] {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.dataTable tfoot td {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    text-align: center;
+
+}
+
+.dataTable tfoot td:nth-child(1) {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    text-align: left;
+
+}
+
+tfoot {
+    font-weight: bold;
+}
+
+.bottomPart {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+    background-color: white;
+}
+
+.dashboard span {
+    margin-top: 10px;
+}
+
+.addDevice {
+    width: 57%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    background-color: white;
+
+    /* padding-bottom: 50px; */
+    padding-top: 30px;
+}
+
+.addDevice input {
+    width: 85%;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    padding-left: 15px;
+    margin-top: 40px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.addDevice span {
+    display: none;
+    color: red;
+    margin-top: 10px;
+}
+
+.addDevice button {
+    padding: 20px 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0931b;
+    color: white;
+    cursor: pointer;
+
+    margin-top: 60px;
+
+    font-weight: bold;
+}
+
+.editDevice {
+    width: 57%;
+    display: none;
+    flex-direction: column;
+    /* align-items: center; */
+    justify-content: center;
+
+    background-color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.editDevice label {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+.editDevice input {
+    width: 90%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 30px;
+    margin-left: 30px;
+    border: none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1.5em;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #fdf8f2;
+}
+
+.editDevice span {
+    display: none;
+    color: red;
+    margin-top: 10px;
+}
+
+.editDevice button {
+    width: 20%;
+    align-self: center;
+    padding: 20px 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f0931b;
+    color: white;
+    cursor: pointer;
+
+    margin-top: 40px;
+
+    font-weight: bold;
+}
+
+.editDevice button:hover {
+    background-color: #ba6d07;
+}
+.action {
+    display: flex;
+}
+
+.action button {
+    border: none;
+    background-color: white;
+}
+
+.action button:hover {
+    color: #2c0be8;
+    cursor: pointer;
+}
+
+
+.addDevice button:hover {
+    background-color: #ee8c0c;
+}
+
+@media (max-width: 414px) {
+    .sidebar {
+        width: 150px;
+        left: -250px;
+        transition: left 0.3s ease;
+    }
+
+    .main {
+        margin: 0;
+        display: flex;
+    }
+
+    .header {
+        display: none;
+    }
+
+    .dataTable {
+        display: none;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .bottomPart {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dashboard {
+        width: 85%;
+        margin-top: 30px;
+    }
+
+    .addDevice {
+        width: 85%;
+        margin-top: 30px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* #addForm {
+        background-color: red;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    } */
+
+    /* .addForm input {
+        width: 100%;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        padding-left: 10px;
+        margin-top: 40px;
+        border: none;
+        box-sizing: border-box;
+        font-size: 1.5em;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    } */
+
+    /* .addForm span {
+        display: none;
+        color: red;
+        margin-top: 10px;
+    } */
+
+    /* .addForm button {
+        padding: 15px 40px;
+        border: none;
+        border-radius: 5px;
+        background-color: #f0931b;
+        color: white;
+        cursor: pointer;
+
+        margin-top: 40px;
+        margin-bottom: 40px;
+        font-weight: bold;
+    } */
+
+    .hamberger {
+        display: block;
+
+    }
+
+    #hambergerBtn {
+        border: none;
+        background-color: rgb(226, 226, 226);
+        padding: 20px;
+    }
+
+    .title {
+        display: flex;
+        flex-direction: column;
+    }
+}

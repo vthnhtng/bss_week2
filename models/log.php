@@ -1,0 +1,52 @@
+<?php
+
+
+
+class Log
+{
+    public $id;
+    public $deviceId;
+    public $logAction;
+    public $logDate;
+
+    function __construct($id, $deviceId, $logAction, $logDate)
+    {
+        $this->id = $id;
+        $this->deviceId = $deviceId;
+        $this->logAction = $logAction;
+        $this->logDate = $logDate ?? date("Y-m-d");
+    }
+
+    public static function all()
+    {
+        $logs = [];
+        $db = DB::getInstance();
+        $sql = "SELECT * FROM logs";
+        $result = $db->query($sql);
+
+        while ($row = $result->fetch_assoc()) {
+            $logs[] = new Log(
+                $row['id'],
+                $row['deviceId'],
+                $row['logAction'],
+                $row['logDate']
+            );
+        }
+
+        return $logs;
+    }
+    public static function getTotalLogs()
+    {
+        $db = DB::getInstance();
+
+        $sql = 'SELECT COUNT(*) FROM logs';
+
+        $result = $db->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $count = $row['COUNT(*)'];
+            return $count;
+        }
+        return 0;
+    }
+}

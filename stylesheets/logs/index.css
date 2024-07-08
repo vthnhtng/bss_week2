@@ -1,0 +1,458 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    font-size: small;
+}
+
+
+i {
+    padding-right: 10px;
+    color: black;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #f0f2f5;
+    color: white;
+    padding: 20px 0;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.sidebar .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+
+.sidebar .title span {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: black;
+}
+
+.sidebar .itemContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.sidebar .sidebarItem {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 1em;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.sidebar .sidebarItem:hover {
+    background-color: #dae2eb;
+}
+
+.sidebar .sidebarItem span {
+    color: #34495e;
+}
+
+.sidebar .sidebarItem span.highlight {
+    color: #4d37ca;
+    font-weight: bold;
+}
+
+
+/* Main container styles */
+.main {
+    margin-left: 200px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: #ecf0f1;
+    padding: 25px 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #bdc3c7;
+}
+
+.header .account {
+    display: flex;
+    align-items: center;
+}
+
+
+.header .account span {
+    font-size: 1em;
+    color: #2c3e50;
+}
+
+.hamberger {
+    display: none;
+}
+
+.container {
+    padding: 80px;
+    padding-top: 40px;
+    background-color: rgb(226, 226, 226);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upper {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.tableTitle {
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.search {
+    display: flex;
+}
+
+#searchInput {
+    padding: 15px;
+    margin-right: 20px;
+    border: none;
+    background-color: rgb(237, 222, 228);
+}
+
+#searchBtn {
+    padding-left: 20px;
+    padding-right: 20px;
+    border: none;
+    border-radius: 10px;
+    background-color: orange;
+    color: white;
+}
+
+#searchBtn:hover {
+    background-color: rgb(227, 148, 2);
+}
+
+.dataTable {
+    width: 80%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    background-color: white;
+    font-size: 1em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.dataTable th {
+    background-color: #f2f2f2;
+    border: 1px solid #e0e0e0;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-right: 50px;
+    padding-left: 0px;
+    text-align: right;
+    font-weight: bold;
+    color: #212121;
+    background-color: rgb(246, 245, 245);
+
+    border: none;
+}
+
+.dataTable th:nth-child(1) {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.dataTable td {
+    border: 1px solid #e0e0e0;
+    border-left: none;
+    border-right: none;
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 50px;
+    padding-left: 0px;;
+    text-align: right;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    color: #333;
+}
+
+.dataTable td:nth-child(1) {
+    text-align: left;
+    padding-left: 15px;
+}
+
+.dataTable tfoot td {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    text-align: center;
+
+}
+
+.dataTable tfoot td:nth-child(1) {
+    font-weight: bold;
+    background-color: #f9f9f9;
+    text-align: left;
+
+}
+
+tfoot {
+    font-weight: bold;
+}
+
+.pages {
+    display: flex;
+    justify-content: center;
+}
+
+.pageNumber {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 5px;
+}
+
+.pageNumber:hover {
+    background-color: #01000f78;
+}
+
+.pageNumber.chosing {
+    background-color: blueviolet;
+}
+#total {
+    font-weight: bold;
+}
+
+tfoot {
+    font-weight: bold;
+}
+
+
+.suggestions {
+    border: 1px solid #ccc;
+    display: none;
+    position: absolute;
+    background-color: #fff;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.suggestions div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.suggestions div:hover {
+    background-color: #f0f0f0;
+}
+
+b {
+    color: red;
+}
+
+td > button {
+    border: none;
+    background-color: white;
+}
+
+td > button:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+
+.modal {
+    display: none;
+    position: fixed; /* Fixes the position */
+    top: 0;          /* Aligns the top edge to the top of the screen */
+    right: 0;        /* Aligns the right edge to the right of the screen */
+    width: 30%;    /* Set the width as desired */
+    height: 100vh;   /* Makes the height 100% of the viewport height */
+    background: #f1f1f1; /* Optional: background color for visibility */
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5); /* Optional: adds a shadow for depth */
+}
+
+.modalTitle {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 70px;
+}
+
+.modalTitle span {
+    padding-top: 20px;
+    padding-left: 20px;
+
+    font-size: 4em;
+    font-weight: bold;
+}
+
+.modalTitle button {
+    border: none;
+}
+
+.modalTitle button:hover {
+    cursor: pointer;
+}
+
+.attributes {
+    display: flex;
+    flex-direction: column;
+}
+
+.attributes .attribute {
+    padding: 10px;
+    margin-left: 10px;   
+}
+
+.attribute label {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.control {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.control button {
+    width: 15%;
+    padding: 20px;
+    margin-right: 10px;
+
+    font-weight: bold;
+    font-size: 16px; /* Adjust the font size */
+    color: #fff; /* Text color */
+    background-color: #007bff; /* Button background color */
+    border: none; /* Removes default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+.control button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+#turnOn:hover {
+    background-color: green;
+}
+
+#turnOff:hover {
+    background-color: red;
+}
+
+@media (max-width: 414px) {
+    .sidebar {
+        width: 150px;
+        left: -250px;
+        transition: left 0.3s ease;
+    }
+
+    .main {
+        margin: 0;
+        display: flex;
+    }
+
+    .header {
+        display: none;
+    }
+
+    .upper {
+        width: 100%;
+        flex-direction: column;
+        margin: 0;
+        align-items: center;
+
+        margin-bottom: 10px;
+    }
+
+    .tableTitle {
+        font-weight: bold;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    #searchInput {
+        padding: 15px;
+        margin-right: 0;
+    }
+
+    #searchBtn {
+        border-radius: 0px;
+    }
+
+
+    .container {
+        padding: 0;
+    }
+
+    .hamberger {
+        display: block;
+
+    }
+
+    #hambergerBtn {
+        border: none;
+        background-color: rgb(226, 226, 226);
+        padding: 20px;
+    }
+
+    .title {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dataTable {
+        margin-bottom: 0px;
+    }
+
+    .pageNumber {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 50px;
+    }
+}
