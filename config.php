@@ -1,5 +1,5 @@
 <?php
-$db_hostname = "your database hostname";
-$db_username = "your database username";
-$db_password = "your database password";
-$db_name = "your database name"; 
+$db_hostname = "localhost";
+$db_username = "vthnhtng";
+$db_password = "Vthnhtng@0511";
+$db_name = "mydb"; 

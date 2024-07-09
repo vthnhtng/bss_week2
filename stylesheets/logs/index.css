@@ -251,6 +251,7 @@ tfoot {
     font-size: 18px;
     font-weight: bold;
     margin: 5px;
+    text-decoration: none;
 }
 
 .pageNumber:hover {

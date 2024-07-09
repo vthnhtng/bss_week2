@@ -39,8 +39,14 @@
             <div class="upper">
                 <span class="tableTitle">Action Logs</span>
                 <div class="search">
-                    <input id="searchInput" type="text" placeholder="name">
-                    <button id="searchBtn" onclick="searchDevice()">Search</button>
+                    <form method="GET" action="">
+                        <input type="hidden" name="controller" value="logs">
+                        <input type="hidden" name="action" value="index">
+                        <input type="hidden" name="page" value=1>
+                        <input id="logsPerPage" type="number" name="rows" value="<?php echo $rows; ?>" step="5" min="1" placeholder="Logs/page">
+                        <input id="searchInput" type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="Search">
+                        <button id="searchBtn" type="submit">Search</button>
+                    </form>
                 </div>
             </div>
             <table class="dataTable">
@@ -56,10 +62,10 @@
                     <?php
                     foreach ($logs as $log) {
                         echo '<tr>
-                                <td>' . htmlspecialchars($log->deviceId) . '</td>
-                                <td>' . htmlspecialchars(Device::findById($log->deviceId)->name) . '</td>
-                                <td>' . htmlspecialchars($log->logAction) . '</td>
-                                <td>' . htmlspecialchars($log->logDate) . '</td>
+                                <td>' . $log->deviceId . '</td>
+                                <td>' . Device::findById($log->deviceId)->name . '</td>
+                                <td>' . $log->logAction . '</td>
+                                <td>' . $log->logDate . '</td>
                             </tr>';
                     }
                     ?>
@@ -68,13 +74,33 @@
                     <tr>
                         <td>Total</td>
                         <td colspan="2"></td>
-                        <?php 
-                            echo '<td id="total">'.Log::getTotalLogs().'</td>';
-                        ?>
+                        <td id="total">
+                            <?php
+                            if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
+                                echo Log::getTotalLogsByKeyword($_GET['keyword']);
+                            } else {
+                                echo Log::getTotalLogs();
+                            }
+                            ?>
+                        </td>
+
                     </tr>
                 </tfoot>
             </table>
             <div class="pages">
+                <?php for ($i = 1; $i <= $totalPages; $i++) : ?>
+                    <a class="pageNumber <?php echo ($i == $currentPage) ? 'chosing' : ''; ?>" href="?controller=logs&action=index&page= <?php echo $i; ?>
+                        <?php
+                        if (isset($_GET['keyword']) && !empty($_GET['keyword'])) {
+                            echo '&keyword=' . $_GET['keyword'];
+                        }
+                        if (isset($_GET['rows']) && !empty($_GET['rows'])) {
+                            echo $i . '&rows=' . $_GET['rows'];
+                        }
+                        ?>">
+                        <?php echo $i; ?>
+                    </a>
+                <?php endfor; ?>
             </div>
         </div>
     </div>
@@ -103,7 +129,7 @@
             <button id="turnOff" onclick="toggleStatus(this)">Turn OFF</button>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <script src="js/logs.js"></script>
 </body>
 
