@@ -1,5 +1,7 @@
 <?php
-require_once('controllers/base_controller.php');
+namespace controllers\login_controller;
+use controllers\base_controller\BaseController;
+use models\User;
 
 class LoginController extends BaseController
 {
@@ -18,10 +20,10 @@ class LoginController extends BaseController
         session_start();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $username = $_POST["username"];
-            $password = $_POST['password'];
-
-            if ($username == "john" && $password == "1234") {
-                $_SESSION['username'] = 'john';
+            $password = $_POST["password"];
+            $user = User::findByUsername($username, $password);
+            if ($user) {
+                $_SESSION['userId'] = $user->id;
                 $this->redirect("devices", "index");
             } else {
                 $data = array(
@@ -32,12 +34,12 @@ class LoginController extends BaseController
         }
     }
 
-    public static function isLoggedIn()
+
+    public function destroy()
     {
         session_start();
-        if (isset($_SESSION) && $_SESSION["username"]) {
-            return true;
-        }
-        return false;
+        session_unset();
+        session_destroy();
+        $this->redirect("login", "new");
     }
 }

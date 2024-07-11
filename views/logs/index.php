@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logs</title>
-    <link rel="stylesheet" href="../stylesheets/logs/index.css">
+    <link rel="stylesheet" href="../public/stylesheets/logs/index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
@@ -19,7 +19,7 @@
         <div class="itemContainer">
             <a href="?controller=devices&action=index" class="sidebarItem"><i class="fa fa-bar-chart fa-2x"></i></i><span>Dashboard</span></a>
             <a href="#" class="sidebarItem"><i class="fa fa-history fa-2x" aria-hidden="true"></i><span class="highlight">Logs</span></a>
-            <a href="#" class="sidebarItem"><i class="fa fa-cog fa-2x" aria-hidden="true"></i><span>Settings</span></a>
+            <a href="?controller=users&action=edit" class="sidebarItem"><i class="fa fa-cog fa-2x" aria-hidden="true"></i><span>Settings</span></a>
         </div>
 
     </div>
@@ -28,7 +28,15 @@
     <div class="main">
         <div class="header">
             <div class="account">
-                <i class="fas fa-user-circle fa-2x"></i>
+                <?php
+                session_start();
+                if (isset($_SESSION["userId"])) {
+                    echo '<img src=uploads/' . User::findById($_SESSION["userId"])->getAvatarUrl() . '>';
+                } else {
+                    echo '<i class="fas fa-user-circle fa-2x"></i>';
+                }
+
+                ?>
                 <span>Welcome John</span>
             </div>
         </div>
@@ -43,7 +51,7 @@
                         <input type="hidden" name="controller" value="logs">
                         <input type="hidden" name="action" value="index">
                         <input type="hidden" name="page" value=1>
-                        <input id="logsPerPage" type="number" name="rows" value="<?php echo $rows; ?>" step="5" min="1" placeholder="Logs/page">
+                        <input id="logsPerPage" type="number" name="rows" value="<?php echo $rows; ?>" min="1" placeholder="Logs/page">
                         <input id="searchInput" type="text" name="keyword" value="<?php echo $keyword; ?>" placeholder="Search">
                         <button id="searchBtn" type="submit">Search</button>
                     </form>
@@ -62,7 +70,7 @@
                     <?php
                     foreach ($logs as $log) {
                         echo '<tr>
-                                <td>' . $log->deviceId . '</td>
+                                <td><button onclick="showDetail(this)">' . $log->deviceId . '</button></td>
                                 <td>' . Device::findById($log->deviceId)->name . '</td>
                                 <td>' . $log->logAction . '</td>
                                 <td>' . $log->logDate . '</td>
@@ -95,7 +103,7 @@
                             echo '&keyword=' . $_GET['keyword'];
                         }
                         if (isset($_GET['rows']) && !empty($_GET['rows'])) {
-                            echo $i . '&rows=' . $_GET['rows'];
+                            echo '&rows=' . $_GET['rows'];
                         }
                         ?>">
                         <?php echo $i; ?>
@@ -124,13 +132,16 @@
                 <span></span>
             </div>
         </div>
-        <div class="control">
-            <button id="turnOn" onclick="toggleStatus(this)">Turn ON</button>
-            <button id="turnOff" onclick="toggleStatus(this)">Turn OFF</button>
-        </div>
+        <form method="POST" action="?controller=logs&action=create" class="control">
+            <input type="hidden" id="deviceId" name="deviceId" value="" />
+            <input type="hidden" id="logAction" name="logAction" value="" />
+            <button type="submit" id="turnOn" onclick="toggleStatus(this)">Turn ON</button>
+            <button type="submit" id="turnOff" onclick="toggleStatus(this)">Turn OFF</button>
+        </form>
     </div>
 
-    <script src="js/logs.js"></script>
+    <script src="../public/javascripts/logs/index.js"></script>
+    <script src="../public/javascripts/sidebar.js"></script>
 </body>
 
 </html>

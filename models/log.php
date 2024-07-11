@@ -1,4 +1,5 @@
 <?php
+namespace models;
 class Log
 {
     public $id;
@@ -14,31 +15,12 @@ class Log
         $this->logDate = $logDate ?? date("Y-m-d");
     }
 
-    public static function all()
-    {
-        $logs = [];
-        $db = DB::getInstance();
-        $sql = "SELECT * FROM logs ORDER BY logDate";
-        $result = $db->query($sql);
-
-        while ($row = $result->fetch_assoc()) {
-            $logs[] = new Log(
-                $row['id'],
-                $row['deviceId'],
-                $row['logAction'],
-                $row['logDate']
-            );
-        }
-
-        return $logs;
-    }
-
     public static function paginate($pageNumber, $recordsPerPage)
     {
         $logs = [];
         $db = DB::getInstance();
         $offset = ($pageNumber - 1) * $recordsPerPage;
-        $sql = "SELECT * FROM logs ORDER BY logDate LIMIT $offset, $recordsPerPage;";
+        $sql = "SELECT * FROM logs ORDER BY logDate DESC LIMIT $offset, $recordsPerPage;";
         $result = $db->query($sql);
 
         while ($row = $result->fetch_assoc()) {
@@ -63,7 +45,7 @@ class Log
                 WHERE devices.name LIKE '%$keyword%'
                 ORDER BY logs.logDate
                 LIMIT $offset, $recordsPerPage;";
-                
+
         $result = $db->query($sql);
 
         while ($row = $result->fetch_assoc()) {
@@ -107,5 +89,42 @@ class Log
             return $count;
         }
         return 0;
+    }
+
+    public static function getLastStatus($id)
+    {
+        $db = DB::getInstance();
+
+        $sql = "SELECT l.deviceId, d.name, l.logAction, l.logDate
+                FROM logs l
+                JOIN devices d ON l.deviceId = d.id
+                WHERE l.deviceId = $id
+                ORDER BY l.logDate DESC
+                LIMIT 1;";
+
+        $result = $db->query($sql);
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            return [
+                'deviceId' => $row['deviceId'],
+                'name' => $row['name'],
+                'logAction' => $row['logAction'],
+                'logDate' => $row['logDate']
+            ];
+        }
+
+        return null;
+    }
+
+    public static function create($deviceId, $logAction)
+    {
+        $db = DB::getInstance();
+        $sql = "INSERT INTO logs (deviceId, logAction) VALUES ($deviceId, '$logAction');";
+
+        if ($db->query($sql) === TRUE) {
+            return true;
+        }
+        echo "Error: " . $sql . "<br>" . $db->error;
+        return false;
     }
 }

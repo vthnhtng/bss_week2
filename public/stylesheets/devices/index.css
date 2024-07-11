@@ -115,8 +115,17 @@ i {
     color: #2c3e50;
 }
 
+.account img {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: none;
+    object-fit: cover;
+}
+
 .hamberger {
     display: none;
+    align-self: flex-start;
 }
 
 /* Container styles */
@@ -166,6 +175,16 @@ i {
     padding-top: 20px;
     padding-bottom: 20px;
     color: #333;
+}
+
+.dataTable td a{
+    text-decoration: none;
+    text-align: center;
+    color: black;
+}
+
+.dataTable td a:hover{
+    color: blue;
 }
 
 
@@ -227,8 +246,14 @@ tfoot {
     /* padding-bottom: 50px; */
     padding-top: 30px;
 }
-
-.addDevice input {
+#addForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#addForm input {
     width: 85%;
     padding-top: 35px;
     padding-bottom: 35px;
@@ -241,13 +266,13 @@ tfoot {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.addDevice span {
+#addForm span {
     display: none;
     color: red;
     margin-top: 10px;
 }
 
-.addDevice button {
+#addForm button {
     padding: 20px 40px;
     border: none;
     border-radius: 5px;
@@ -255,16 +280,32 @@ tfoot {
     color: white;
     cursor: pointer;
 
-    margin-top: 60px;
-
+    margin-top: 40px;
+    margin-bottom: 20px;
     font-weight: bold;
+}
+
+#updateForm {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#updateFrom div {
+    width: 80%;
+    margin-bottom: 30px;
+}
+
+#updateFrom div input {
+    padding: 10px;
 }
 
 .editDevice {
     width: 57%;
     display: none;
     flex-direction: column;
-    /* align-items: center; */
+    align-items: center;
     justify-content: center;
 
     background-color: white;
@@ -283,6 +324,7 @@ tfoot {
     padding-bottom: 15px;
     padding-left: 30px;
     margin-left: 30px;
+    margin-bottom: 20px;
     border: none;
     border-radius: 4px;
     box-sizing: border-box;
@@ -314,6 +356,12 @@ tfoot {
 
 .editDevice button:hover {
     background-color: #ba6d07;
+}
+
+.error-message {
+    margin-top: 10px;
+    color: red;
+    align-self: center;
 }
 .action {
     display: flex;
@@ -378,45 +426,6 @@ tfoot {
         justify-content: center;
         align-items: center;
     }
-
-    /* #addForm {
-        background-color: red;
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    } */
-
-    /* .addForm input {
-        width: 100%;
-        padding-top: 20px;
-        padding-bottom: 20px;
-        padding-left: 10px;
-        margin-top: 40px;
-        border: none;
-        box-sizing: border-box;
-        font-size: 1.5em;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    } */
-
-    /* .addForm span {
-        display: none;
-        color: red;
-        margin-top: 10px;
-    } */
-
-    /* .addForm button {
-        padding: 15px 40px;
-        border: none;
-        border-radius: 5px;
-        background-color: #f0931b;
-        color: white;
-        cursor: pointer;
-
-        margin-top: 40px;
-        margin-bottom: 40px;
-        font-weight: bold;
-    } */
 
     .hamberger {
         display: block;

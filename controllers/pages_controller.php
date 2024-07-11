@@ -1,5 +1,6 @@
 <?php
-require_once('controllers/base_controller.php');
+namespace controllers\pages_controller;
+use controllers\base_controller\BaseController;
 
 class PagesController extends BaseController
 {

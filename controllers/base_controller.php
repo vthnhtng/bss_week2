@@ -1,4 +1,5 @@
 <?php
+namespace controllers\base_controller;
 class BaseController
 {
     protected $folder;
@@ -13,8 +14,12 @@ class BaseController
         }
     }
 
-    function redirect($controller, $action)
+    function redirect($controller, $action, $error = "")
     {
-        header("Location: index.php?controller=$controller&action=$action");
+        if ($error != "") {
+            header("Location: index.php?controller=$controller&action=$action&error=$error");
+        } else {
+            header("Location: index.php?controller=$controller&action=$action");
+        }
     }
 }

@@ -1,0 +1,115 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    background-color: #fff;
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+
+    width: 350px;
+}
+
+.container .title {
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color: #645757;
+}
+
+.container input[type="text"],
+.container input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: 0px;
+    box-sizing: border-box;
+    background-color: #f7eeee;
+    font-size: 16px;
+    color: #333;
+}
+
+.container input[type="text"]::placeholder,
+.container input[type="password"]::placeholder {
+    color: #e2cfcf;
+}
+
+.submit-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.container button[type="submit"] {
+    background-color: #f59016;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 25px 10px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1)
+}
+
+.container button[type="submit"]:hover {
+    background-color: #e08900;
+}
+
+.container .alert {
+    font-size: 12px;
+    color: #ff0000;
+}
+
+
+.submitDiv a {
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 14px;
+
+    margin-left: 20px
+}
+
+.submitDiv a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for screens smaller than 414px */
+@media (max-width: 414px) {
+    .container {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .container .title {
+        font-size: 16px;
+    }
+
+    .container input[type="text"],
+    .container input[type="password"] {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    .container button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .submitDiv a {
+        font-size: 12px;
+        margin-left: 10px;
+    }
+}

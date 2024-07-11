@@ -110,8 +110,17 @@ i {
     color: #2c3e50;
 }
 
+.account img {
+    width: 33px;
+    height: 33px;
+    border-radius: 50%;
+    border: none;
+    object-fit: cover;
+}
+
 .hamberger {
     display: none;
+    align-self: flex-start;
 }
 
 .container {
@@ -153,6 +162,8 @@ i {
 #searchBtn {
     padding-left: 20px;
     padding-right: 20px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     border: none;
     border-radius: 10px;
     background-color: orange;
@@ -161,6 +172,14 @@ i {
 
 #searchBtn:hover {
     background-color: rgb(227, 148, 2);
+}
+
+#logsPerPage {
+    padding: 15px;
+    margin-right: 20px;
+    border: none;
+    background-color: rgb(229, 109, 157);
+    width: 150px;
 }
 
 .dataTable {
@@ -201,7 +220,8 @@ i {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 50px;
-    padding-left: 0px;;
+    padding-left: 0px;
+    ;
     text-align: right;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -261,6 +281,7 @@ tfoot {
 .pageNumber.chosing {
     background-color: blueviolet;
 }
+
 #total {
     font-weight: bold;
 }
@@ -293,12 +314,12 @@ b {
     color: red;
 }
 
-td > button {
+td>button {
     border: none;
     background-color: white;
 }
 
-td > button:hover {
+td>button:hover {
     cursor: pointer;
     color: blue;
 }
@@ -306,13 +327,20 @@ td > button:hover {
 
 .modal {
     display: none;
-    position: fixed; /* Fixes the position */
-    top: 0;          /* Aligns the top edge to the top of the screen */
-    right: 0;        /* Aligns the right edge to the right of the screen */
-    width: 30%;    /* Set the width as desired */
-    height: 100vh;   /* Makes the height 100% of the viewport height */
-    background: #f1f1f1; /* Optional: background color for visibility */
-    box-shadow: -2px 0 5px rgba(0,0,0,0.5); /* Optional: adds a shadow for depth */
+    position: fixed;
+    /* Fixes the position */
+    top: 0;
+    /* Aligns the top edge to the top of the screen */
+    right: 0;
+    /* Aligns the right edge to the right of the screen */
+    width: 30%;
+    /* Set the width as desired */
+    height: 100vh;
+    /* Makes the height 100% of the viewport height */
+    background: #f1f1f1;
+    /* Optional: background color for visibility */
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    /* Optional: adds a shadow for depth */
 }
 
 .modalTitle {
@@ -345,7 +373,7 @@ td > button:hover {
 
 .attributes .attribute {
     padding: 10px;
-    margin-left: 10px;   
+    margin-left: 10px;
 }
 
 .attribute label {
@@ -365,17 +393,25 @@ td > button:hover {
     margin-right: 10px;
 
     font-weight: bold;
-    font-size: 16px; /* Adjust the font size */
-    color: #fff; /* Text color */
-    background-color: #007bff; /* Button background color */
-    border: none; /* Removes default border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    font-size: 16px;
+    /* Adjust the font size */
+    color: #fff;
+    /* Text color */
+    background-color: #007bff;
+    /* Button background color */
+    border: none;
+    /* Removes default border */
+    border-radius: 5px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    /* Smooth transitions */
 }
 
 .control button:hover {
-    background-color: #0056b3; /* Darker shade on hover */
+    background-color: #0056b3;
+    /* Darker shade on hover */
 }
 
 #turnOn:hover {

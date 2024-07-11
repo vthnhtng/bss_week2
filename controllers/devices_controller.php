@@ -1,6 +1,8 @@
 <?php
-require_once('controllers/base_controller.php');
-require_once('models/device.php');
+namespace controllers\devices_controller;
+use controllers\base_controller\BaseController;
+use models\Device;
+use models\User;
 
 class DevicesController extends BaseController
 {
@@ -11,14 +13,17 @@ class DevicesController extends BaseController
 
     public function index()
     {
-        require_once('controllers/login_controller.php');
-        if (LoginController::isLoggedIn()) {
-            $devices = Device::all();
-            $data = array("devices" => $devices);
-            $this->render("index", $data);
-        } else {
-            $this->redirect("login", "new");
+        session_start();
+        if (isset($_SESSION['userId']) && !empty($_SESSION['userId'])) {
+            $user = User::findById($_SESSION['userId']);
+            if ($user && $user->isLoggedIn()) {
+                $devices = Device::all();
+                $data = array("devices" => $devices);
+                $this->render("index", $data);
+                return;
+            }
         }
+        $this->redirect("login", "new");
     }
 
     public function create()
@@ -112,8 +117,6 @@ class DevicesController extends BaseController
             } else {
                 $this->redirect("devices", "index");
             }
-        } else {
-            // TODO handle non post request
         }
     }
 
@@ -128,8 +131,6 @@ class DevicesController extends BaseController
             } else {
                 $this->redirect("devices", "index");
             }
-        } else {
-            // TODO handle invalid request
         }
     }
 }

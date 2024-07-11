@@ -1,49 +1,10 @@
 // Select DOM elements 
 const dataTable = document.querySelector(".dataTable")
-const total = document.querySelector("#total")
-const newDeviceName = document.querySelector("#deviceName")
-const newDeviceIP = document.querySelector("#deviceIP")
 const hambergerBtn = document.querySelector("#hambergerBtn")
-const sidebar = document.querySelector(".sidebar")
-const main = document.querySelector(".main")
-const title = document.querySelector(".title")
 const dashboard = document.querySelector(".dashboard")
 const addDeviceDiv = document.querySelector(".addDevice")
 const editDeviceDiv = document.querySelector(".editDevice")
 
-
-// Hide/show sidebar on mobile devices
-function showSidebar() {
-    sidebar.style.left = 0
-}
-
-function hideSidebar() {
-    sidebar.style.left = "-250px"
-}
-
-// Event listener for click events to show/hide sidebar
-document.addEventListener('click', function (event) {
-    if (hambergerBtn.contains(event.target)) {
-        showSidebar()
-        title.querySelector("i").className = "fas fa-user-circle fa-2x"
-        title.querySelector("span").textContent = "Welcome John"
-    } else if (screen.width <= 414 && !sidebar.contains(event.target)) {
-        hideSidebar()
-    }
-});
-
-// Event listener for window resize to handle UI errors
-window.addEventListener('resize', function (event) {
-    if (screen.width > 414) {
-        showSidebar()
-        title.querySelector("i").className = "fa-solid fa-fax icon-header fa-2x"
-        title.querySelector("span").textContent = "Device Management"
-    } else if (screen.width <= 414) {
-        hideSidebar()
-        title.querySelector("i").className = "fas fa-user-circle fa-2x"
-        title.querySelector("span").textContent = "Welcome John"
-    }
-}, true);
 
 // Draw chart with chart.js
 let chartInstance = null

@@ -1,4 +1,5 @@
 <?php
+namespace models;
 class Device
 {
     public $id;
@@ -160,20 +161,5 @@ class Device
         } else {
             return null;
         }
-    }
-
-    public static function getTotalConsumption()
-    {
-        $db = DB::getInstance();
-
-        $sql = 'SELECT SUM(powerConsumption) FROM Devices';
-
-        $result = $db->query($sql);
-        if ($result && $result->num_rows > 0) {
-            $row = $result->fetch_assoc();
-            $count = $row['COUNT(*)'];
-            return $count;
-        }
-        return 0;
     }
 }

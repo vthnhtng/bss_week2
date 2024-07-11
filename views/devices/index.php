@@ -5,10 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Device Dashboard</title>
-    <link rel="stylesheet" href="../stylesheets/devices/index.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="../public/stylesheets/devices/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -19,11 +17,9 @@
             <span>Device Management</span>
         </div>
         <div class="itemContainer">
-            <a href="" class="sidebarItem"><i class="fa fa-bar-chart fa-2x"></i></i><span
-                    class="highlight">Dashboard</span></a>
-            <a href="?controller=logs&action=index" class="sidebarItem"><i class="fa fa-history fa-2x"
-                    aria-hidden="true"></i><span>Logs</span></a>
-            <a href="#" class="sidebarItem"><i class="fa fa-cog fa-2x" aria-hidden="true"></i><span>Settings</span></a>
+            <a href="" class="sidebarItem"><i class="fa fa-bar-chart fa-2x"></i></i><span class="highlight">Dashboard</span></a>
+            <a href="?controller=logs&action=index" class="sidebarItem"><i class="fa fa-history fa-2x" aria-hidden="true"></i><span>Logs</span></a>
+            <a href="?controller=users&action=edit" class="sidebarItem"><i class="fa fa-cog fa-2x" aria-hidden="true"></i><span>Settings</span></a>
         </div>
 
     </div>
@@ -32,7 +28,15 @@
     <div class="main">
         <div class="header">
             <div class="account">
-                <i class="fas fa-user-circle fa-2x"></i>
+                <?php
+                session_start();
+                if (isset($_SESSION["userId"])) {
+                    echo '<img src=uploads/' . User::findById($_SESSION["userId"])->getAvatarUrl() . '>';
+                } else {
+                    echo '<i class="fas fa-user-circle fa-2x"></i>';
+                }
+
+                ?>
                 <span>Welcome John</span>
             </div>
         </div>
@@ -62,7 +66,7 @@
                                 <td>' . htmlspecialchars($device->createdDate) . '</td>
                                 <td>' . htmlspecialchars($device->powerConsumption) . '</td>
                                 <td class="action">
-                                    <button onclick="toggleEditForm(this, ' . $device->id . ')">Edit</button>|
+                                    <a onclick="toggleEditForm(this, ' . $device->id . ')">Edit</a>|
                                     <a href="?controller=devices&action=delete&id=' . htmlspecialchars($device->id) . '">Delete</a>
                                 </td>
                             </tr>';
@@ -86,42 +90,54 @@
                     <span>Power Consumption</span>
                     <canvas id="chart"></canvas>
                 </div>
-
-                <div class="addDevice">
+                <?php
+                session_start();
+                $addDeviceDisplay = isset($_SESSION['update_error']) ? 'none;"' : 'flex;"';
+                $editDeviceDisplay = isset($_SESSION['update_error']) ? 'flex;"' : 'none;"';
+                ?>
+                <div class="addDevice" style="display: <?php echo $addDeviceDisplay ?>>
+                    <form action=" ?controller=devices&action=create" method="post" id="addForm">
                     <h1>ADD A NEW DEVICE</h1>
-                    <form action="?controller=devices&action=create" method="post" id="addForm">
-                        <input id="deviceName" name="deviceName" type="text" placeholder="name">
-                        <input id="deviceIP" name="deviceIP" type="text" placeholder="IP Address">
-                        <input id="deviceMAC" name="deviceMAC" type="text" placeholder="MAC Address">
-                        <?php
-                        session_start();
-                        if (isset($_SESSION['create_error'])) {
-                            echo '<div class="error-message">' . $_SESSION['create_error'] . '</div>';
-                            unset($_SESSION['create_error']); // Clear the error message from session
-                        }
-                        ?>
-                        <button type="submit">ADD DEVICE</button>
+                    <input id="deviceName" name="deviceName" type="text" placeholder="name">
+                    <input id="deviceIP" name="deviceIP" type="text" placeholder="IP Address">
+                    <input id="deviceMAC" name="deviceMAC" type="text" placeholder="MAC Address">
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['create_error'])) {
+                        echo '<div class="error-message">' . $_SESSION['create_error'] . '</div>';
+                        unset($_SESSION['create_error']); // Clear the error message from session
+                    }
+                    ?>
+                    <button type="submit">ADD DEVICE</button>
                     </form>
                 </div>
-                <div class="editDevice">
-                    <form action="?controller=devices&action=update" method="post" id="">
-                        <input type="hidden" id="deviceIdEdit" name="deviceId" value="" />
-                        <label>Device Name</label>
+                <div class="editDevice" style="display: <?php echo $editDeviceDisplay ?>>
+                    <h1>UPDATE DEVICE</h1>
+                    <form action=" ?controller=devices&action=update" method="post" id="updateForm">
+                    <input type="hidden" id="deviceIdEdit" name="deviceId" value="" />
+                    <div><label>Device Name</label>
                         <input type="text" id="deviceNameEdit" name="deviceName" />
+                    </div>
+                    <div>
                         <label>MAC Address</label>
                         <input type="text" id="deviceMACEdit" name="deviceMAC" />
+                    </div>
+                    <div>
                         <label>IP Address</label>
                         <input type="text" id="deviceIPEdit" name="deviceIP" />
+                    </div>
+                    <div>
                         <label>Power Consumption</label>
                         <input type="text" id="devicePowerEdit" name="powerConsumption" />
-                        <?php
-                        session_start();
-                        if (isset($_SESSION['update_error'])) {
-                            echo '<div class="error-message">' . $_SESSION['update_error'] . '</div>';
-                            unset($_SESSION['update_error']); // Clear the error message from session
-                        }
-                        ?>
-                        <button>SAVE</button>
+                    </div>
+                    <?php
+                    session_start();
+                    if (isset($_SESSION['update_error'])) {
+                        echo '<div class="error-message">' . $_SESSION['update_error'] . '</div>';
+                        unset($_SESSION['update_error']); // Clear the error message from session
+                    }
+                    ?>
+                    <button>SAVE</button>
                     </form>
                 </div>
             </div>
@@ -129,7 +145,8 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../javascripts/devices/index.js"></script>
+    <script src="../public/javascripts/devices/index.js"></script>
+    <script src="../public/javascripts/sidebar.js"></script>
 </body>
 
 </html>
